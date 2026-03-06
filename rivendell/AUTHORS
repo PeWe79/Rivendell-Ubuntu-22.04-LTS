@@ -1,0 +1,59 @@
+The following people have contributed to the Rivendell codebase:
+
+Todd Baker <bakert@rfa.org>
+   C client binding for the Rivendell Web API [rivwebcapi].
+   --create-startdate-offset and --create-enddate-offset options for
+   RDImport(1).
+   Hotkey system.
+
+Luigino Bracci <lbracci@gmail.com>
+   Spanish translation.
+
+Josh Edelstein <edelsteinj@rfa.org>
+   Icon Set
+
+Pavel Fric <pavelfric@seznam.cz>.
+   Czech Translation (cs)
+
+Stefan Gabriel <stg@st-gabriel.de>
+   Integrated Music Scheduler
+   RDLibrary MultiCart Editing Mode
+
+Federico Grau <grauf@rfa.org>
+   JACK driver cleanups, RDAdmin Audio Ports Dialog enhancements.
+   PAM Authentication Module
+
+Fred Gleason <fredg@paravelsystems.com>
+   Application Architect
+
+Patrick Linstruth <patrick@deltecent.com>
+   General Bugfixes
+   rddbconfig(8) Utility
+   TuneIn, IceCast2, and X-Command PyPAD scripts
+
+Dan Mills <dmills@spamblock.demon.co.uk>
+   General Bughunter Extrordinaire
+
+Eivind Ødegård <gingermig@yahoo.no>
+   Norwegian Translation (nb_NO and nn_NO)
+
+Michael Papsdorf <info@emitworks.com>
+   German translation (de).
+
+Alban Peignier <alban.peignier@free.fr>
+   RDImport batch file importer.
+   RDScheduler music scheduler.
+   Debian Packaging.
+
+Daniel Roviriego <danifernando@gmail.com>
+   Portuguese Translation (pt_BR).
+
+Chris Smowton
+   MP4 importation support.
+
+Scott Spillers <scotts@paravelsystems.com>
+   The original Icon set
+
+David Klann <dklann@broadcasttool.com>
+   Some small bug fixes
+

@@ -1,0 +1,36 @@
+                  RDAIRPLAY Table Layout for Rivendell
+
+The RDAIRPLAY table holds configuration data for the RDAirPlay widget.
+
+FIELD NAME           TYPE              REMARKS
+------------------------------------------------------------------------------
+ID                     int(10) unsigned  * Primary key, Auto Increment
+SEGUE_LENGTH           int(11)
+TRANS_LENGTH           int(11)
+LOG_MODE_STYLE         int(11)           0=Unified, 1=Independent
+PIE_COUNT_LENGTH       int(11)
+PIE_COUNT_ENDPOINT     int(11)           0=EOF, 1=Segue Point
+CHECK_TIMESYNC         enum('N','Y')
+STATION_PANELS         int(11)
+USER_PANELS            int(11)
+SHOW_AUX_1             enum('N','Y')
+SHOW_AUX_2             enum('N','Y')
+CLEAR_FILTER           enum('N','Y')
+DEFAULT_TRANS_TYPE     int(11)
+BAR_ACTION             int(10) unsigned  0=None, 1=Start Next
+FLASH_PANEL            enum('N','Y')
+PANEL_PAUSE_ENABLED    enum('N','Y')
+BUTTON_LABEL_TEMPLATE  varchar(32)
+PAUSE_ENABLED          enum('N','Y')
+DEFAULT_SERVICE        varchar(10)       From SERVICES.NAME
+HOUR_SELECTOR_ENABLED  enum('N','Y')
+EXIT_CODE              int(11)           0=clean, 1=dirty
+VIRTUAL_EXIT_CODE      int(11)           0=clean, 1=dirty
+EXIT_PASSWORD          varchar(41)
+SKIN_PATH              varchar(191)
+SHOW_COUNTERS          enum('N','Y')
+AUDITION_PREROLL       int(11)
+TITLE_TEMPLATE         varchar(64)
+ARTIST_TEMPLATE        varchar(64)
+OUTCUE_TEMPLATE        varchar(64)
+DESCRIPTION_TEMPLATE   varchar(64)

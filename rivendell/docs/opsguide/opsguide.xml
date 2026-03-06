@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+
+<!DOCTYPE book [
+  <!ENTITY frontspiece SYSTEM "frontspiece.xml">
+  <!ENTITY pad SYSTEM "pad.xml">
+  <!ENTITY overview SYSTEM "overview.xml">
+  <!ENTITY rdlogin SYSTEM "rdlogin.xml">
+  <!ENTITY rdlibrary SYSTEM "rdlibrary.xml">
+  <!ENTITY rdcatch SYSTEM "rdcatch.xml">
+  <!ENTITY rdlogedit SYSTEM "rdlogedit.xml">
+  <!ENTITY rdairplay SYSTEM "rdairplay.xml">
+  <!ENTITY rdcartslots SYSTEM "rdcartslots.xml">
+  <!ENTITY rdlogmanager SYSTEM "rdlogmanager.xml">
+  <!ENTITY voicetracking SYSTEM "voicetracking.xml">
+  <!ENTITY rdcastmanager SYSTEM "rdcastmanager.xml">
+  <!ENTITY webget SYSTEM "webget.xml">
+  <!ENTITY rml SYSTEM "rml.xml">
+  <!ENTITY utilities SYSTEM "utilities.xml">
+  <!ENTITY rdadmin SYSTEM "rdadmin.xml">
+  <!ENTITY rddbconfig SYSTEM "rddbconfig.xml">
+  <!ENTITY gfdl SYSTEM "gfdl.xml">
+  <!ENTITY gplv2 SYSTEM "gplv2.xml">
+  <!ENTITY gpio_switcher_devices SYSTEM "gpio_switcher_devices.xml">
+  <!ENTITY filepath_wildcards SYSTEM "filepath_wildcards.xml">
+  <!ENTITY metadata_wildcards SYSTEM "metadata_wildcards.xml">
+  <!ENTITY rivendell_filter SYSTEM "rivendell_filter.xml">
+  <!ENTITY wings_filter SYSTEM "wings_filter.xml">
+]>
+
+<book xmlns="http://docbook.org/ns/docbook" version="5.0">
+  &frontspiece;
+  <part xml:id="part.rivendell_operations" xmlns="http://docbook.org/ns/docbook" version="5.0">
+    <title>Rivendell Operations</title>
+    &overview;
+    &rdlogin;
+    &rdlibrary;
+    &rdcatch;
+    &rdlogedit;
+    &rdairplay;
+    &rdcartslots;
+    &rdlogmanager;
+    &voicetracking;
+    &rdcastmanager;
+    &webget;
+  </part>
+  <part xml:id="part.rivendell_administration" xmlns="http://docbook.org/ns/docbook" version="5.0">
+    <title>Rivendell Administration</title>
+    &rdadmin;
+    &rddbconfig;
+    &rml;
+    &pad;
+    &utilities;
+  </part>
+  <part xml:id="part.appendices" xmlns="http://docbook.org/ns/docbook" version="5.0">
+    &gfdl;
+    &gplv2;
+    &gpio_switcher_devices;
+    &filepath_wildcards;
+    &metadata_wildcards;
+    &rivendell_filter;
+    &wings_filter;
+  </part>
+</book>
+
+<!--
+<structure xml:id="manual">
+  <output renderas="book"/>
+</structure>
+-->

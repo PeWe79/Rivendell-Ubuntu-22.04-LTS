@@ -1,0 +1,359 @@
+// rddeck.cpp
+//
+// Abstract a Rivendell Deck.
+//
+//   (C) Copyright 2002-2003,2016-2018 Fred Gleason <fredg@paravelsystems.com>
+//
+//   This program is free software; you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License version 2 as
+//   published by the Free Software Foundation.
+//
+//   This program is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public
+//   License along with this program; if not, write to the Free Software
+//   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//
+
+#include <rddb.h>
+#include <rdconf.h>
+#include <rddeck.h>
+#include <rdescape_string.h>
+
+//
+// Global Classes
+//
+RDDeck::RDDeck(QString station,unsigned channel,bool create)
+{
+  RDSqlQuery *q;
+  QString sql;
+
+  deck_station=station;
+  deck_channel=channel;
+
+  if(create) {
+    sql=QString("select ID from DECKS where ")+
+      "(STATION_NAME=\""+RDEscapeString(deck_station)+"\")&&"+
+      QString().sprintf("(CHANNEL=%d)",deck_channel);
+    q=new RDSqlQuery(sql);
+    if(q->size()!=1) {
+      delete q;
+      sql=QString().
+        sprintf("insert into DECKS set ")+
+	"STATION_NAME=\""+RDEscapeString(deck_station)+"\","+
+	QString().sprintf("CHANNEL=%d",deck_channel);
+      q=new RDSqlQuery(sql);
+      delete q;
+    }
+    else {
+      delete q;
+    }
+  }
+}
+
+
+bool RDDeck::isActive() const
+{
+  QString sql;
+  RDSqlQuery *q;
+  bool ret=false;
+
+  sql=QString("select ID from DECKS where ")+
+    "(STATION_NAME=\""+RDEscapeString(deck_station)+"\")&&"+
+    QString().sprintf("(CHANNEL=%u)&&",deck_channel)+
+    "(CARD_NUMBER>=0)&&"+
+    "(PORT_NUMBER>=0)";
+  q=new RDSqlQuery(sql);
+  ret=q->first();
+  delete q;
+
+  return ret;
+}
+
+
+QString RDDeck::station() const
+{
+  return deck_station;
+}
+
+
+int RDDeck::channel() const
+{
+  return deck_channel;
+}
+
+
+int RDDeck::cardNumber() const
+{
+  return GetIntValue("CARD_NUMBER");
+}
+
+
+void RDDeck::setCardNumber(int card) const
+{
+  SetRow("CARD_NUMBER",card);
+}
+
+
+int RDDeck::streamNumber() const
+{
+  return GetIntValue("STREAM_NUMBER");
+}
+
+
+void RDDeck::setStreamNumber(int stream) const
+{
+  SetRow("STREAM_NUMBER",stream);
+}
+
+
+int RDDeck::portNumber() const
+{
+  return GetIntValue("PORT_NUMBER");
+}
+
+
+void RDDeck::setPortNumber(int port) const
+{
+  SetRow("PORT_NUMBER",port);
+}
+
+
+int RDDeck::monitorPortNumber() const
+{
+  return GetIntValue("MON_PORT_NUMBER");
+}
+
+
+void RDDeck::setMonitorPortNumber(int port) const
+{
+  SetRow("MON_PORT_NUMBER",port);
+}
+
+
+bool RDDeck::defaultMonitorOn() const
+{
+  return RDBool(GetStringValue("DEFAULT_MONITOR_ON"));
+}
+
+
+void RDDeck::setDefaultMonitorOn(bool state) const
+{
+  SetRow("DEFAULT_MONITOR_ON",state);
+}
+
+
+RDSettings::Format RDDeck::defaultFormat() const
+{
+  return (RDSettings::Format)GetIntValue("DEFAULT_FORMAT");
+}
+
+
+void RDDeck::setDefaultFormat(RDSettings::Format format) const
+{
+  SetRow("DEFAULT_FORMAT",(int)format);
+}
+
+
+int RDDeck::defaultChannels() const
+{
+  return GetIntValue("DEFAULT_CHANNELS");
+}
+
+
+void RDDeck::setDefaultChannels(int chan) const
+{
+  SetRow("DEFAULT_CHANNELS",chan);
+}
+
+
+int RDDeck::defaultBitrate() const
+{
+  return GetIntValue("DEFAULT_BITRATE");
+}
+
+
+void RDDeck::setDefaultBitrate(int rate) const
+{
+  SetRow("DEFAULT_BITRATE",rate);
+}
+
+
+int RDDeck::defaultThreshold() const
+{
+  return GetIntValue("DEFAULT_THRESHOLD");
+}
+
+
+void RDDeck::setDefaultThreshold(int level) const
+{
+  SetRow("DEFAULT_THRESHOLD",level);
+}
+
+
+QString RDDeck::switchStation() const
+{
+  return GetStringValue("SWITCH_STATION");
+}
+
+
+void RDDeck::setSwitchStation(QString str) const
+{
+  SetRow("SWITCH_STATION",str);
+}
+
+
+int RDDeck::switchMatrix() const
+{
+  return GetIntValue("SWITCH_MATRIX");
+}
+
+
+QString RDDeck::switchMatrixName() const
+{
+  QString matrix_name;
+  QString sql;
+
+  sql=QString("select NAME from MATRICES where ")+
+    "(STATION_NAME=\""+RDEscapeString(switchStation())+"\")&&"+
+    QString().sprintf("(MATRIX=%d)",switchMatrix());
+  RDSqlQuery *q=new RDSqlQuery(sql);
+  if(q->first()) {
+    matrix_name=q->value(0).toString();
+  }
+  delete q;
+  return matrix_name;
+}
+
+
+void RDDeck::setSwitchMatrix(int matrix) const
+{
+  SetRow("SWITCH_MATRIX",matrix);
+}
+
+
+int RDDeck::switchOutput() const
+{
+  return GetIntValue("SWITCH_OUTPUT");
+}
+
+
+QString RDDeck::switchOutputName() const
+{
+  QString output_name;
+  QString sql;
+
+  sql=QString("select NAME from OUTPUTS where ")+
+    "(STATION_NAME=\""+RDEscapeString(switchStation())+"\")&&"+
+    QString().sprintf("(MATRIX=%d)&&",switchMatrix())+
+    QString().sprintf("(NUMBER=%d)",switchOutput());
+  RDSqlQuery *q=new RDSqlQuery(sql);
+  if(q->first()) {
+    output_name=q->value(0).toString();
+  }
+  delete q;
+  return output_name;
+}
+
+
+void RDDeck::setSwitchOutput(int output) const
+{
+  SetRow("SWITCH_OUTPUT",output);
+}
+
+
+int RDDeck::switchDelay() const
+{
+  return GetIntValue("SWITCH_DELAY");
+}
+
+
+void RDDeck::setSwitchDelay(int delay) const
+{
+  SetRow("SWITCH_DELAY",delay);
+}
+
+
+int RDDeck::GetIntValue(const QString &field) const
+{
+  QString sql;
+  RDSqlQuery *q;
+  int accum;
+  
+  sql=QString("select ")+field+" from DECKS where "+
+    "(STATION_NAME=\""+RDEscapeString(deck_station)+"\")&&"+
+    QString().sprintf("(CHANNEL=%d)",deck_channel);
+  q=new RDSqlQuery(sql);
+  if(q->first()) {
+    accum=q->value(0).toInt();
+    delete q;
+    return accum;
+  }
+  delete q;
+  return 0;    
+}
+
+
+QString RDDeck::GetStringValue(const QString &field) const
+{
+  QString sql;
+  RDSqlQuery *q;
+  QString accum;
+  
+  sql=QString("select ")+field+" from DECKS where "+
+    "(STATION_NAME=\""+RDEscapeString(deck_station)+"\")&&"+
+    QString().sprintf("(CHANNEL=%d)",deck_channel);
+  q=new RDSqlQuery(sql);
+  if(q->first()) {
+    accum=q->value(0).toString();
+    delete q;
+    return accum;
+  }
+  delete q;
+  return 0;    
+}
+
+
+void RDDeck::SetRow(const QString &param,int value) const
+{
+  RDSqlQuery *q;
+  QString sql;
+
+  sql=QString("update DECKS set ")+
+    param+QString().sprintf("=%d where ",value)+
+    "(STATION_NAME=\""+RDEscapeString(deck_station)+"\")&&"+
+    QString().sprintf("(CHANNEL=%d)",deck_channel);
+  q=new RDSqlQuery(sql);
+  delete q;
+}
+
+
+void RDDeck::SetRow(const QString &param,const QString &value) const
+{
+  RDSqlQuery *q;
+  QString sql;
+
+  sql=QString("update DECKS set ")+
+    param+"=\""+RDEscapeString(value)+"\" where "+
+    "(STATION_NAME=\""+RDEscapeString(deck_station)+"\")&&"+
+    QString().sprintf("(CHANNEL=%d)",deck_channel);
+  q=new RDSqlQuery(sql);
+  delete q;
+}
+
+
+void RDDeck::SetRow(const QString &param,bool value) const
+{
+  RDSqlQuery *q;
+  QString sql;
+
+  sql=QString("update DECKS set ")+
+    param+"=\""+RDYesNo(value)+"\" where "+
+    "(STATION_NAME=\""+RDEscapeString(deck_station)+"\")&&"+
+    QString().sprintf("(CHANNEL=%d)",deck_channel);
+  q=new RDSqlQuery(sql);
+  delete q;
+}
