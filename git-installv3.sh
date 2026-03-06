@@ -46,7 +46,7 @@ echo Add PPA QT4
 add-apt-repository ppa:rock-core/qt4
 apt-get update
 
-apt-get install -y build-essential autogen automake pkg-config libtool m4 make libssl-dev gcc g++ git
+apt-get install -y build-essential autogen automake pkg-config libtool m4 make libssl-dev gcc g++
 
 echo Installing Rivendell dependencies...
 
