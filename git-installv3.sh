@@ -41,7 +41,16 @@ apt-get update
 
 echo Installing build tools...
 
-apt-get install -y libexpat1-dev libexpat1 libid3-dev libcurl4-gnutls-dev libcoverart-dev libdiscid-dev libmusicbrainz5-dev libcdparanoia-dev libsndfile1-dev libpam0g-dev libvorbis-dev python3 python3-pycurl python3-pymysql python3-serial python3-requests python3-venv python3-virtualenv python3-build python3-virtualenv twine libsamplerate0-dev libsoundtouch-dev libsystemd-dev libjack-jackd2-dev libasound2-dev libflac-dev libflac++-dev libmp3lame-dev libmad0-dev libtwolame-dev docbook5-xml libxml2-utils docbook-xsl-ns xsltproc fop make g++ libltdl-dev autoconf automake libssl-dev libtag1-dev debhelper openssh-server autoconf-archive gnupg pbuilder ubuntu-dev-tools apt-file hpklinux-dev libmagick++-dev libqt4-dev
+echo Add PPA QT4
+
+add-apt-repository ppa:rock-core/qt4
+apt-get update
+
+apt-get install -y build-essential autogen automake pkg-config libtool m4 make libssl-dev gcc g++ git
+
+echo Installing Rivendell dependencies...
+
+apt-get install -y libexpat1-dev libexpat1 libid3-dev libcurl4-gnutls-dev libcoverart-dev libdiscid-dev libmusicbrainz5-dev libcdparanoia-dev libsndfile1-dev libpam0g-dev libvorbis-dev python3 python3-pycurl python3-pymysql python3-serial python3-requests python3-venv python3-virtualenv python3-build python3-virtualenv twine libsamplerate0-dev libsoundtouch-dev libsystemd-dev libjack-jackd2-dev libasound2-dev libflac-dev libflac++-dev libmp3lame-dev libmad0-dev libtwolame-dev docbook5-xml libxml2-utils docbook-xsl-ns xsltproc fop make g++ libltdl-dev autoconf automake libssl-dev libtag1-dev debhelper openssh-server autoconf-archive gnupg pbuilder ubuntu-dev-tools apt-file libmagick++-dev libqt4-dev
 
 echo Set up Docbook environment variable ...
 
