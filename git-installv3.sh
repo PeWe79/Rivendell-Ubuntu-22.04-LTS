@@ -43,7 +43,7 @@ echo Installing build tools...
 
 echo Add PPA QT4
 
-add-apt-repository ppa:ubuntuhandbook1/ppa
+add-apt-repository ppa:ubuntuhandbook1/ppa -y
 apt-get update
 
 apt-get install -y build-essential autogen automake pkg-config libtool m4 make libssl-dev gcc g++
@@ -154,7 +154,9 @@ echo Make Jack Audio with Promiscuous Mode...
 
 cp assets/rivendell-env.sh /etc/profile.d/
 
-echo Compiling Rivendell
+echo Downloading Rivendell
+
+git clone -b v3 https://github.com/ElvishArtisan/rivendell.git
 
 cd rivendell
 
