@@ -201,7 +201,7 @@ echo ; echo "update `STATIONS` set `REPORT_EDITOR_PATH`='/usr/bin/gedit'" | mysq
 # Disable RDMonitor
 echo ; echo "Disable Rivendell Monitor" ; echo
 
-chmod -x /usr/local/bin/rdmonitor
+chmod -x /usr/bin/rdmonitor
 
 echo ; echo "Making Pypad Scipts Work.." ; echo
 
