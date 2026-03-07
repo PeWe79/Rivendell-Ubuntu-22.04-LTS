@@ -43,7 +43,7 @@ echo Installing build tools...
 
 echo Add PPA QT4
 
-add-apt-repository ppa:rock-core/qt4
+add-apt-repository ppa:ubuntuhandbook1/ppa
 apt-get update
 
 apt-get install -y build-essential autogen automake pkg-config libtool m4 make libssl-dev gcc g++
